@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tastescout">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_scout"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        >
+        <meta-data
+            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+            android:value="true"/>
+        <activity android:name=".FirebaseAuthActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".search.SearchActivity"
+            android:label="@string/title_activity_search"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ItemsList.ItemListActivity"
+            android:label="@string/title_item_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ItemsList.ItemDetailActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName="com.tastescout.ItemsList.ItemListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tastescout.ItemsList.ItemListActivity" />
+        </activity>
+        <activity android:name=".search.ProfileActivity" />
+
+        <receiver android:name=".Widget.ItemWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/item_widget_provider_info" />
+        </receiver>
+        <service
+            android:name=".Widget.listViewsService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+    </application>
+
+</manifest>

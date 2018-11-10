@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "819475123709",
+    "firebase_url": "https://taste-scout.firebaseio.com",
+    "project_id": "taste-scout",
+    "storage_bucket": "taste-scout.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819475123709:android:74d207b8d6a2d345",
+        "android_client_info": {
+          "package_name": "com.tastescout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819475123709-q2lgeqsl9rmfki8r2dsd1q4vs8r03jd3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tastescout",
+            "certificate_hash": "c3994e29bfc4d801340c3210dc9af72cfbc905f2"
+          }
+        },
+        {
+          "client_id": "819475123709-67kjqscl0s9l53dqnqbvjnag54ajoeup.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRYNZKr-wqmmkTvx9a8j0gBSZAYmhmHBU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819475123709-67kjqscl0s9l53dqnqbvjnag54ajoeup.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".search.SearchActivity"
+    tools:showIn="@layout/app_bar_search">
+
+
+    <EditText
+        android:id="@+id/search_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/search_for_something"
+        app:layout_constraintEnd_toStartOf="@+id/search_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/search_button"
+        android:layout_width="45dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="41dp"
+        android:background="@drawable/search_selector"
+        android:elevation="6dp"
+        android:src="@drawable/ic_loupe"
+        android:text="@string/search"
+        app:layout_constraintBottom_toBottomOf="@+id/search_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/search_et"
+        android:contentDescription="@string/search_button"
+        android:onClick="search"
+        />
+
+    <CheckBox
+        android:id="@+id/movies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="53dp"
+        android:text="@string/movies"
+        app:layout_constraintBottom_toBottomOf="@+id/songs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/songs"
+        android:onClick="onCheckboxClicked"
+        />
+
+    <CheckBox
+        android:id="@+id/songs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="55dp"
+        android:text="@string/songs"
+        app:layout_constraintEnd_toEndOf="@+id/search_button"
+        app:layout_constraintTop_toBottomOf="@+id/search_et"
+        android:onClick="onCheckboxClicked"
+        />
+
+    <CheckBox
+        android:id="@+id/tv_shows"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:text="@string/tv_shows"
+        app:layout_constraintStart_toStartOf="@+id/movies"
+        app:layout_constraintTop_toBottomOf="@+id/movies"
+        android:onClick="onCheckboxClicked"
+        />
+
+    <CheckBox
+        android:id="@+id/books"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:text="@string/books"
+        app:layout_constraintStart_toStartOf="@+id/songs"
+        app:layout_constraintTop_toBottomOf="@+id/songs"
+        android:onClick="onCheckboxClicked"
+        />
+
+    <CheckBox
+        android:id="@+id/authors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/authors"
+        app:layout_constraintStart_toStartOf="@+id/tv_shows"
+        app:layout_constraintTop_toBottomOf="@+id/tv_shows"
+        android:onClick="onCheckboxClicked"
+        />
+
+    <CheckBox
+        android:id="@+id/games"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/games"
+        app:layout_constraintStart_toStartOf="@+id/books"
+        app:layout_constraintTop_toBottomOf="@+id/books"
+        android:onClick="onCheckboxClicked"
+        />
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
+
+</android.support.constraint.ConstraintLayout>

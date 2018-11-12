@@ -2,8 +2,11 @@ package com.tastescout.ItemsList;
 
 
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
+import android.view.MenuItem;
+
 import com.tastescout.R;
 import com.tastescout.Retrofit.Result;
 import butterknife.ButterKnife;
@@ -22,8 +25,8 @@ public class ItemDetailActivity extends AppCompatActivity {
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(mItem.getName());
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
 
@@ -40,6 +43,16 @@ public class ItemDetailActivity extends AppCompatActivity {
 
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 

@@ -3,6 +3,7 @@ package com.tastescout.ItemsList;
 import android.app.Application;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,7 +28,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ItemDetailFragment extends Fragment {
-
 
     @BindView(R.id.item_image)
     ImageView itemImage;
@@ -83,6 +83,16 @@ public class ItemDetailFragment extends Fragment {
             }
         }
         getMovieItem();
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, getString(R.string.share_body)+" "+mItem.getName()+" "+mItem.getType()+".\n"+getString(R.string.think));
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
+            }
+        });
     }
 
     void checkType(String type) {

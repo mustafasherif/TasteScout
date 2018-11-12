@@ -1,5 +1,6 @@
 package com.tastescout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -66,8 +67,8 @@ public class FirebaseAuthActivity extends AppCompatActivity {
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
     private void signIn(String email,String password){
-        progressBar.setEnabled(true);
-        logInButton.setEnabled(false);
+        progressBar.setVisibility(View.VISIBLE);
+        logInButton.setVisibility(View.INVISIBLE);
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -78,8 +79,8 @@ public class FirebaseAuthActivity extends AppCompatActivity {
                             checkIfEmailVerified();
                         } else {
                             // If sign in fails, display a message to the user.
-                            logInButton.setEnabled(true);
-                            progressBar.setEnabled(false);
+                            logInButton.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.INVISIBLE);
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(getApplication(),R.string.check_email,Toast.LENGTH_SHORT).show();
                         }
@@ -222,17 +223,19 @@ public class FirebaseAuthActivity extends AppCompatActivity {
         if (user != null) {
             if (user.isEmailVerified())
             {
-                logInButton.setEnabled(true);
-                progressBar.setEnabled(false);
+                logInButton.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
                 openHome();
             }
             else
             {
-                logInButton.setEnabled(true);
-                progressBar.setEnabled(false);
+                logInButton.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(getApplication(),R.string.vrify_email,Toast.LENGTH_LONG).show();
             }
         }
     }
+
+
 }

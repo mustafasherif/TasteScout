@@ -1,8 +1,11 @@
 package com.tastescout.search;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -16,8 +19,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.firebase.ui.auth.AuthUI;
@@ -50,6 +55,8 @@ public class SearchActivity extends AppCompatActivity
     private ArrayList info;
     @BindView(R.id.search_et)EditText searchEditText;
     @BindView(R.id.adView)AdView adView;
+    @BindView(R.id.progress)ProgressBar progressBar;
+    @BindView(R.id.search_button)Button searchButton;
     TextView userName;
     TextView userMail;
     @Override
@@ -100,21 +107,6 @@ public class SearchActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -183,42 +175,63 @@ public class SearchActivity extends AppCompatActivity
 
     public void search(View view) {
         String searchWord=searchEditText.getText().toString();
-        if(!searchWord.equals("")){
-            RetrofitConnection.getInstance().getJSONApi().getSimilar(searchWord,"221996-mustafas-74YXC3DJ","1").enqueue(new Callback<Item>() {
-                @Override
-                public void onResponse(@NonNull Call<Item> call, @NonNull Response<Item> response) {
-                    if (response.body() != null) {
-                        items= (ArrayList<Result>) response.body().getSimilar().getResults();
-                        info = (ArrayList<Info>) response.body().getSimilar().getInfo();
-                        if(items.size()>0){
-                            Intent intent=new Intent(getApplication(),ItemListActivity.class);
-                            intent.putParcelableArrayListExtra("resultList",items);
-                            intent.putParcelableArrayListExtra("infoList", info);
-                            startActivity(intent);
-                        }else {
-                            AlertDialog.Builder builder1 = new AlertDialog.Builder(SearchActivity.this);
-                            builder1.setMessage(R.string.unknown);
-                            builder1.setCancelable(true);
-                            builder1.setPositiveButton(
-                                    "OK",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            dialog.cancel();
-                                        }
-                                    });
+        if (isOnline()){
+            if(!searchWord.equals("")){
+                searchButton.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
+                RetrofitConnection.getInstance().getJSONApi().getSimilar(searchWord,"221996-mustafas-74YXC3DJ","1").enqueue(new Callback<Item>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Item> call, @NonNull Response<Item> response) {
+                        if (response.body() != null) {
+                            searchButton.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.INVISIBLE);
+                            items= (ArrayList<Result>) response.body().getSimilar().getResults();
+                            info = (ArrayList<Info>) response.body().getSimilar().getInfo();
+                            if(items.size()>0){
 
-                            AlertDialog alert11 = builder1.create();
-                            alert11.show();
+                                Intent intent=new Intent(getApplication(),ItemListActivity.class);
+                                intent.putParcelableArrayListExtra("resultList",items);
+                                intent.putParcelableArrayListExtra("infoList", info);
+                                startActivity(intent);
+                            }else {
+                                searchButton.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.INVISIBLE);
+                                AlertDialog.Builder builder1 = new AlertDialog.Builder(SearchActivity.this);
+                                builder1.setMessage(R.string.unknown);
+                                builder1.setCancelable(true);
+                                builder1.setPositiveButton(
+                                        "OK",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
+
+                                AlertDialog alert11 = builder1.create();
+                                alert11.show();
+                            }
                         }
                     }
-                }
-                @Override
-                public void onFailure(@NonNull Call<Item> call, @NonNull Throwable t) {
-                    Log.e("connectionFailed",t+"");
-                    Toast.makeText(getApplication(),R.string.check_connection,Toast.LENGTH_LONG).show();
-                }
-            });
+                    @Override
+                    public void onFailure(@NonNull Call<Item> call, @NonNull Throwable t) {
+                        Log.e("connectionFailed",t+"");
+                        searchButton.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(getApplication(),R.string.check_connection,Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        }else {
+            Toast.makeText(getApplication(),R.string.check_connection,Toast.LENGTH_LONG).show();
         }
+
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
 }

@@ -8,36 +8,46 @@
     tools:context=".search.SearchActivity"
     tools:showIn="@layout/app_bar_search">
 
-
     <EditText
         android:id="@+id/search_et"
-        android:layout_width="wrap_content"
+        android:layout_width="174dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/search_for_something"
-        app:layout_constraintEnd_toStartOf="@+id/search_button"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/search_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/search_button"
-        android:layout_width="45dp"
-        android:layout_height="31dp"
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_container"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="41dp"
-        android:background="@drawable/search_selector"
-        android:elevation="6dp"
-        android:src="@drawable/ic_loupe"
-        android:text="@string/search"
         app:layout_constraintBottom_toBottomOf="@+id/search_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/search_et"
-        android:contentDescription="@string/search_button"
-        android:onClick="search"
-        />
+        >
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:textColor="#fff"
+            android:onClick="search"
+            android:text="@string/search"
+            />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/progress"
+            />
+    </FrameLayout>
 
     <CheckBox
         android:id="@+id/movies"
@@ -58,7 +68,7 @@
         android:layout_marginTop="61dp"
         android:layout_marginEnd="55dp"
         android:text="@string/songs"
-        app:layout_constraintEnd_toEndOf="@+id/search_button"
+        app:layout_constraintEnd_toEndOf="@+id/search_container"
         app:layout_constraintTop_toBottomOf="@+id/search_et"
         android:onClick="onCheckboxClicked"
         />
@@ -120,6 +130,6 @@
         ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
-        ads:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
+        ads:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

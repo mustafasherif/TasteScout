@@ -21,21 +21,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/search_button"
-        android:layout_width="45dp"
-        android:layout_height="31dp"
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_container"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="41dp"
-        android:background="@drawable/search_selector"
-        android:elevation="6dp"
-        android:src="@drawable/ic_loupe"
-        android:text="@string/search"
         app:layout_constraintBottom_toBottomOf="@+id/search_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/search_et"
-        android:contentDescription="@string/search_button"
-        android:onClick="search"
-        />
+        >
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:textColor="#fff"
+            android:onClick="search"
+            android:text="@string/search"
+            />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/progress"
+            />
+    </FrameLayout>
     <CheckBox
         android:id="@+id/movies"
         android:layout_width="88dp"

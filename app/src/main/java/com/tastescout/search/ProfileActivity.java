@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,6 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_peofile);
         ButterKnife.bind(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -42,9 +44,21 @@ public class ProfileActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<Result> mMovieItems) {
                 mItems= (ArrayList<Result>) mMovieItems;
                 if (mItems != null) {
-                    savedItems.setText(mItems.size());
+                    savedItems.setText(String.valueOf(mItems.size()));
                 }
             }
         });
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

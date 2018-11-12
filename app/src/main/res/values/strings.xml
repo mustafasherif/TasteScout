@@ -20,6 +20,7 @@
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="email_address">E-mail Address</string>
+    <string name="email">E-mail Address: </string>
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="dont_have_account">Don\'t have account?</string>
@@ -30,10 +31,13 @@
     <string name="profile">profile</string>
     <string name="saved">saved items</string>
     <string name="log_out">log out</string>
-    <string name="user_name">User Name</string>
-    <string name="number_of_saved">Saved Items</string>
+    <string name="user_name">User Name: </string>
+    <string name="number_of_saved">Saved Items: </string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="check_email">Failed:check Email and Password</string>
     <string name="unknown">Sorry, we haven\'t heard of this item yet</string>
+    <string name="item_poster">item poster image from wekipedia page</string>
+    <string name="share_body">TasteScout App recommended me </string>
+    <string name="think">What do you think of it?</string>
 </resources>

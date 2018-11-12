@@ -31,12 +31,14 @@
         <activity
             android:name=".ItemsList.ItemDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName="com.tastescout.ItemsList.ItemListActivity">
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.tastescout.ItemsList.ItemListActivity" />
         </activity>
-        <activity android:name=".search.ProfileActivity" />
+        <activity android:name=".search.ProfileActivity"
+            android:parentActivityName="com.tastescout.search.SearchActivity"
+            />
 
         <receiver android:name=".Widget.ItemWidgetProvider">
             <intent-filter>

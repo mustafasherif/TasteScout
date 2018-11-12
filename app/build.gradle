@@ -8,7 +8,7 @@ android {
         config {
             keyAlias 'keyrealse'
             keyPassword '123456'
-            storeFile file('tastescoutKeystore.jks')
+            storeFile file('tastescoutkeystore.jks')
             storePassword '123456'
         }
     }
@@ -23,7 +23,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }

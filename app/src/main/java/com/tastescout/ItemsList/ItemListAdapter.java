@@ -81,26 +81,8 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
         }
     }
     private void checkType(String type, ImageView itemImage){
-        switch (type) {
-            case "movie":
-                itemImage.setImageResource(R.drawable.movie);
-                break;
-            case "show":
-                itemImage.setImageResource(R.drawable.show);
-                break;
-            case "music":
-                itemImage.setImageResource(R.drawable.music);
-                break;
-            case "author":
-                itemImage.setImageResource(R.drawable.author);
-                break;
-            case  "game":
-                itemImage.setImageResource(R.drawable.game);
-                break;
-            case "book":
-                itemImage.setImageResource(R.drawable.book);
-                break;
-        }
+        ImageLoadingAsyncTask imageLoadingAsyncTask=new ImageLoadingAsyncTask(itemImage);
+        imageLoadingAsyncTask.execute(type);
     }
 
     void changeSorting(ArrayList<Result> items){

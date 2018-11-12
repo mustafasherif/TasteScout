@@ -172,7 +172,10 @@ public class SearchActivity extends AppCompatActivity
         }
         editor.apply();
     }
-
+    /**
+     * perform new search when user hit search button
+     * the return result is array list of 10 items.
+     */
     public void search(View view) {
         String searchWord=searchEditText.getText().toString();
         if (isOnline()){
